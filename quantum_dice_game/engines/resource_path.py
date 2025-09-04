@@ -55,3 +55,14 @@ def wf_collapse_gif_path():
     # Return the full path as a string
     out_path = os.path.join(resource_dir, "schrodinger_dice_wavefunction_collapse.gif")
     return out_path
+
+def iam_response_path():
+    base_dir = os.path.dirname(__file__)
+    resource_dir = os.path.join(base_dir, "..", "resource_folder_gen")
+    resource_dir = os.path.abspath(resource_dir)
+
+    os.makedirs(resource_dir, exist_ok=True)
+
+    # Return the full path as a string
+    out_path = os.path.join(resource_dir, "iam_response.pkl")
+    return out_path

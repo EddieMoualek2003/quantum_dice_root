@@ -1,5 +1,7 @@
 import requests
 import pickle
+from .resource_path import *
+
 
 def enable_watson(api_key):
     # Get IAM Access Token
@@ -26,7 +28,7 @@ def enable_watson(api_key):
         return False
 
     # Save response if valid
-    with open('resource_folder_gen/iam_response.pkl', 'wb') as f:
+    with open(iam_response_path(), 'wb') as f:
         pickle.dump(iam_response, f)
 
     print("IAM token acquired successfully.")
@@ -37,7 +39,7 @@ def ask_watson(user_request, project_id):
     watsonx_url = "https://us-south.ml.cloud.ibm.com"
     model_id = "ibm/granite-3-8b-instruct"
 
-    with open('resource_folder_gen/iam_response.pkl', 'rb') as f:
+    with open(iam_response_path(), 'rb') as f:
         iam_response = pickle.load(f)
 
     access_token = iam_response.json()["access_token"]
