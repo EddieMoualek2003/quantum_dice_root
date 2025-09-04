@@ -1,0 +1,3 @@
+# ---- Your API Key and Project ID ----
+api_key = "hc59yZ3Lw26Xf4Eye4Sp4o1SqGXPr4h3fB9DlyVIfYsU"
+project_id = "bd17df45-7425-4ee1-b3d6-39340c1a768c"
