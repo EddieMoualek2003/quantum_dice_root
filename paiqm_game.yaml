@@ -1,7 +1,7 @@
 schema_version: 1
 id: quantum-dice
 name: "quantum-dice-game"
-version: "1.2.0"
+version: "1.1.0"
 description: "Quantum Dice Game"
 author: "Eddie Moualek"
 license: "MIT"
@@ -12,6 +12,14 @@ requirements:
     - qiskit
     - pyqt5
     - matplotlib
+    - requests
+    - pickle
+    - scipy
+    - qiskit_ibm_runtime
+    - qiskit_aer
+    - matplotlib
+    - numpy
+    - PyQt5
 runtime:
   type: "python"
   entry:
