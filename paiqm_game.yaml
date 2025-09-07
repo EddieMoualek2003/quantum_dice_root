@@ -1,0 +1,27 @@
+schema_version: 1
+id: quantum-dice
+name: "Quantum Dice"
+version: "0.0.0"
+description: "Learn randomness and measurement with a simple quantum dice."
+author: "Eddie Moualek"
+license: "MIT"
+
+requirements:
+  python: ">=3.11,<3.13"
+  pip:
+    - qiskit
+runtime:
+  type: "python"
+  entry:
+    module: "quantum_dice_game"   # runs: python -m quantum_dice_game
+    args: []
+ui:
+  icon: ""
+  categories: ["education","beginner"]
+
+compatibility:
+  raspi_models: ["Pi 4","Pi 5"]
+  min_ram_mb: 2048
+
+hooks:
+  post_clone: []

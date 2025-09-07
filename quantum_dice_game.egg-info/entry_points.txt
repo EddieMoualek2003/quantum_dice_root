@@ -1,0 +1,2 @@
+[console_scripts]
+quantum-dice = quantum_dice_game.__main__:main

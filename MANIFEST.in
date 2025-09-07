@@ -1,0 +1,3 @@
+recursive-include quantum_dice_game/resource_folder_gen *
+recursive-include quantum_dice_game/pages *
+recursive-include quantum_dice_game/engines *

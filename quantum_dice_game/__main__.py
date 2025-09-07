@@ -1,4 +1,9 @@
 from .game import run
 
-if __name__ == "__main__":
+def main():
+    """Entry point for the Quantum Dice Game."""
+    print("Starting Quantum Dice Game")
     run()
+
+if __name__ == "__main__":
+    main()
