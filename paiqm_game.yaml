@@ -1,7 +1,7 @@
 schema_version: 1
 id: quantum-dice
 name: "quantum-dice-game"
-version: "1.1.0"
+version: "1.2.1"
 description: "Quantum Dice Game"
 author: "Eddie Moualek"
 license: "MIT"
