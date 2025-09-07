@@ -10,7 +10,6 @@ requirements:
   python: ">=3.11,<3.13"
   pip:
     - qiskit
-    - pyqt5
     - matplotlib
     - requests
     - scipy
