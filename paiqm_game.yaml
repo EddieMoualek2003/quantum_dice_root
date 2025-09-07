@@ -13,7 +13,6 @@ requirements:
     - pyqt5
     - matplotlib
     - requests
-    - pickle
     - scipy
     - qiskit_ibm_runtime
     - qiskit_aer
