@@ -1,36 +1,31 @@
+name: Build and Release Python Package
+
 on:
   push:
-    branches: [ main ]
     tags:
-      - "v*"
+      - "v*"   # run only on tags like v1.3.7
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - run: pip install build
-      - run: python -m build .
-      - uses: actions/upload-artifact@v4
-        with:
-          name: quantum-dice-dist
-          path: dist/
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install build
-      - run: python -m build .
-      - uses: softprops/action-gh-release@v1
+
+      - name: Install build tool
+        run: pip install build
+
+      - name: Build wheel and sdist
+        run: python -m build .
+
+      - name: Create GitHub Release and Upload Assets
+        uses: softprops/action-gh-release@v1
         with:
           files: dist/*
         env:
