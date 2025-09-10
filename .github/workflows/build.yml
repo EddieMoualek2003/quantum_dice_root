@@ -2,9 +2,9 @@ name: Build and Release Python Package
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]   # always build artifacts on main
     tags:
-      - "v*"
+      - "v*"             # run on tags too
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       - run: pip install build
       - run: python -m build .
 
-      - name: Upload artifact (always)
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: quantum-dice-dist
