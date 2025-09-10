@@ -37,7 +37,7 @@ def enable_watson(api_key):
 
 def ask_watson(user_request, project_id):
     watsonx_url = "https://us-south.ml.cloud.ibm.com"
-    model_id = "ibm/granite-3-8b-instruct"
+    model_id = "ibm/granite-8b-code-instruct"
 
     with open(iam_response_path(), 'rb') as f:
         iam_response = pickle.load(f)
@@ -80,3 +80,22 @@ def ask_watson(user_request, project_id):
         return generated_text
     else:
         print("'results' key not found in response.")
+
+
+def list_watsonx_models(project_id):
+    with open(iam_response_path(), 'rb') as f:
+        iam_response = pickle.load(f)
+
+    access_token = iam_response.json()["access_token"]
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {access_token}"
+    }
+
+    url = f"https://us-south.ml.cloud.ibm.com/ml/v1/foundation_model_specs?version=2024-05-01&project_id={project_id}"
+
+    response = requests.get(url, headers=headers)
+    models = response.json()
+
+    print("Available models:")
