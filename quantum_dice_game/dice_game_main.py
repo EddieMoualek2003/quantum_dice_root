@@ -28,4 +28,5 @@ def set_mode(mode):
 #         dice_console_main()
 
 def main():
+    print("DICE GAME STARTING")
     dice_gui_main()
