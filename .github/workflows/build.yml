@@ -3,10 +3,19 @@ name: Build and Release Python Package
 on:
   push:
     tags:
-      - 'v*'   # Only run on version tags
+      - 'v*'          # run only on version tags (e.g. v1.0.0)
+
+# The release step needs this permission
+permissions:
+  contents: write
+
+# Prevent two runs from racing on the same tag
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -16,18 +25,41 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
 
-      - name: Install build tool
-        run: pip install build
+      - name: Upgrade pip and install build backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
 
       - name: Build wheel and sdist
-        run: python -m build .
+        run: python -m build --sdist --wheel --outdir dist
+
+      - name: Upload dists as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download built artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           files: dist/*
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}   # e.g. v1.2.3-rc1 => prerelease
+          generate_release_notes: true
+          fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
