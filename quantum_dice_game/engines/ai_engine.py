@@ -37,7 +37,7 @@ def enable_watson(api_key):
 
 def ask_watson(user_request, project_id):
     watsonx_url = "https://us-south.ml.cloud.ibm.com"
-    model_id = "ibm/granite-8b-code-instruct"
+    model_id = "ibm/granite-3-1-8b-base"
 
     with open(iam_response_path(), 'rb') as f:
         iam_response = pickle.load(f)
