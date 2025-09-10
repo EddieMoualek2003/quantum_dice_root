@@ -2,33 +2,32 @@ name: Build and Release Python Package
 
 on:
   push:
-    branches: [ main ]   # always build artifacts on main
     tags:
-      - "v*"             # run on tags too
+      - 'v*'   # Only run on version tags
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - run: pip install build
-      - run: python -m build .
+      - name: Install build tool
+        run: pip install build
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: quantum-dice-dist
-          path: dist/
+      - name: Build wheel and sdist
+        run: python -m build .
 
-      - name: Create GitHub Release (tags only)
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
           files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
