@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: quantum-dice-game
-Version: 1.3.4
+Version: 1.3.6
 Summary: Quantum Dice Game
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
