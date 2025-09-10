@@ -15,7 +15,6 @@ dependencies = [
     "scipy",
     "qiskit_ibm_runtime",
     "qiskit_aer",
-    "matplotlib",
     "numpy",
     "PyQt5",
     "pylatexenc"
