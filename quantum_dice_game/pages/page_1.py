@@ -7,6 +7,7 @@ import os
 
 def build_state1():
     # Generate the combined equation image
+    gen_equations_combined()
     out_path = superpos_equations()
 
     w = QWidget()
